@@ -47,7 +47,7 @@ The DebugPreference is a shell variable that determines how Windows PowerShell r
 * 'Stop' - Debug statements are displayed and the script Stops.
 * 'Continue' - Debug statements are displayed and the script continues to run
 * 'Inquire' - Debug statements are displayed and you are prompted to continue
-```
+
 ## Dependencies
 
 The `Assert-Condition` function uses a ternary operator and thus requires PowerShell 7.0 or later, as the ternary operator is not supported in earlier versions of PowerShell.
