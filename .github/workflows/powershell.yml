@@ -7,7 +7,7 @@
 # For more information on PSScriptAnalyzer in general, see
 # https://github.com/PowerShell/PSScriptAnalyzer
 
-name: PSScriptAnalyzer
+name: PSScriptAnalyzer and Pester Test
 
 on:
   push:
@@ -26,10 +26,19 @@ jobs:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-    name: PSScriptAnalyzer
+    name: PSScriptAnalyzer and Pester Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup PowerShell
+        uses: actions/setup-powershell@v1
+
+      - name: Install required modules
+        run: |
+          Install-Module -Name Pester -Force -SkipPublisherCheck
+          Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
+        shell: pwsh
 
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@6b2948b1944407914a58661c49941824d149734f
@@ -41,6 +50,11 @@ jobs:
           # Include your own basic security rules. Removing this option will run all the rules
           includeRule: '"PSAvoidGlobalAliases", "PSAvoidUsingConvertToSecureStringWithPlainText"'
           output: results.sarif
+
+      - name: Run Pester tests
+        run: |
+          Invoke-Pester -Output Detailed
+        shell: pwsh
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
