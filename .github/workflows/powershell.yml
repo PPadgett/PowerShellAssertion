@@ -51,7 +51,7 @@ jobs:
      # Run Pester Test     
       - name: Run Pester tests
         run: |
-          Invoke-Pester -Path 'path\to\your\tests.ps1' -OutputFormat NUnitXml -OutputFile 'path\to\output.xml'
+          Invoke-Pester -Path 'path\to\your\tests.ps1' -OutputFormat NUnitXml -OutputFile 'results-pester.xml'
         shell: pwsh
      
      # Upload the NunitXml file generated in the previous step
@@ -59,4 +59,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: ./test-results.xml
+          files: ./results-pester.xml
