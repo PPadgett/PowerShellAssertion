@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Pester tests
         run: |
-          pwsh -Command "& {Invoke-Pester -Output Detailed}"
+          pwsh -Command "& {Invoke-Pester -Output Detailed -Path .}"
         shell: bash
 
       # Upload the SARIF file generated in the previous step
