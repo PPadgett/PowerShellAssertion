@@ -31,14 +31,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Install required modules
         run: |
-          Install-Module -Name Pester -Force -SkipPublisherCheck
-          Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
-        shell: pwsh
+          pwsh -Command "& {Install-Module -Name Pester -Force -SkipPublisherCheck}"
+          pwsh -Command "& {Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck}"
+        shell: bash
 
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@6b2948b1944407914a58661c49941824d149734f
@@ -53,8 +50,8 @@ jobs:
 
       - name: Run Pester tests
         run: |
-          Invoke-Pester -Output Detailed
-        shell: pwsh
+          pwsh -Command "& {Invoke-Pester -Output Detailed}"
+        shell: bash
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
