@@ -41,14 +41,22 @@ jobs:
           # Include your own basic security rules. Removing this option will run all the rules
           includeRule: '"PSAvoidGlobalAliases", "PSAvoidUsingConvertToSecureStringWithPlainText"'
           output: results.sarif
-      - name: Run Pester tests
-        run: |
-          Invoke-Pester -Output Detailed
-        shell: pwsh
-
-
+          
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
+     
+     # Run Pester Test     
+      - name: Run Pester tests
+        run: |
+          Invoke-Pester -Path 'path\to\your\tests.ps1' -OutputFormat NUnitXml -OutputFile 'path\to\output.xml'
+        shell: pwsh
+     
+     # Upload the NunitXml file generated in the previous step
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: ./test-results.xml
