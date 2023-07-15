@@ -6,7 +6,7 @@ Describe 'Assert-Condition' {
     Context 'When DebugPreference is not SilentlyContinue and the condition is true' {
         It 'Should output the provided message' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'Continue' } -ParameterFilter { $Name -eq 'DebugPreference' }
-            { Assert-Condition -Condition ($true) -Message 'Assertion failed: Test error message' } |
+            { Assert-Condition -Condition $true -Message 'Assertion failed: Test error message' } |
                 Should -StartWith 'Assertion failed:'
         }
     }
