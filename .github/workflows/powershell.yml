@@ -51,5 +51,7 @@ jobs:
      # Run Pester Test     
       - name: Run Pester tests
         run: |
+          $conf = New-PesterConfiguration
+          $conf.Output.Verbosity = 'Detailed'
           Invoke-Pester ./Assertion.Tests.ps1 -CI GithubActions
         shell: pwsh
