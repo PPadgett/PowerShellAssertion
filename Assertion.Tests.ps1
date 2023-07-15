@@ -3,8 +3,7 @@
 }
 
 # Load the functions to be tested
-. .\Assert-Condition.ps1
-. .\Get-Square.ps1
+. .\Assertion.ps1
 
 # Test cases
 Describe 'Assert-Condition' {
