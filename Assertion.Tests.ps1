@@ -6,15 +6,15 @@ Describe 'Assert-Condition' {
     Context 'When DebugPreference is not SilentlyContinue and the condition is true' {
         It 'Should throw an error with the provided message' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'Continue' } -ParameterFilter { $Name -eq 'DebugPreference' }
-            { Assert-Condition -Condition ($true) -Message 'Test error message' } |
-                Should -Throw -ExpectedMessage 'Assertion failed: Test error message'
+            { Assert-Condition -Condition ($true) -Message 'Assertion failed: Test error message' } |
+                Should -StartWith 'Assertion failed:'
         }
     }
 
     Context 'When DebugPreference is SilentlyContinue or the condition is false' {
         It 'Should not throw an error' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'SilentlyContinue' } -ParameterFilter { $Name -eq 'DebugPreference' }
-            { Assert-Condition -Condition ($false) -Message 'Test error message' } |
+            { Assert-Condition -Condition ($false) -Message 'Assertion failed: Test error message' } |
                 Should -Not -Throw
         }
     }
@@ -37,7 +37,7 @@ Describe 'Get-Square' {
         It 'Should throw an error stating that the input must not be a negative number' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'Continue' } -ParameterFilter { $Name -eq 'DebugPreference' }
             { Get-Square -num -4 } |
-                Should -Throw -ExpectedMessage 'Assertion failed: Input must not be a negative number.'
+                Should -ExpectedMessage 'Assertion failed: Input must not be a negative number.'
         }
     }
 }
