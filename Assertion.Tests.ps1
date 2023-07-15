@@ -1,6 +1,11 @@
-﻿BeforeAll {
+ BeforeAll {
     . $PSCommandPath.Replace('.Tests.ps1', '.ps1')
 }
+
+# Load the functions to be tested
+. .\Assert-Condition.ps1
+. .\Get-Square.ps1
+
 # Test cases
 Describe 'Assert-Condition' {
     Context 'When DebugPreference is not SilentlyContinue and the condition is true' {
