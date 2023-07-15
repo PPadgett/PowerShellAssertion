@@ -18,7 +18,7 @@ on:
     - cron: '35 5 * * 4'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
