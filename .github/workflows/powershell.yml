@@ -53,5 +53,5 @@ jobs:
         run: |
           $conf = New-PesterConfiguration
           $conf.Output.Verbosity = 'Detailed'
-          Invoke-Pester ./Assertion.Tests.ps1 -CI GithubActions
+          Invoke-Pester ./Assertion.Tests.ps1
         shell: pwsh
