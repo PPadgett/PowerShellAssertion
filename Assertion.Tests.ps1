@@ -7,7 +7,7 @@ Describe 'Assert-Condition' {
         It 'Should output the provided message' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'Continue' } -ParameterFilter { $Name -eq 'DebugPreference' }
             { Assert-Condition -Condition $true -Message 'Assertion failed: Test error message' } |
-                Should -StartWith 'Assertion failed:'
+                Should -Contain 'Assertion failed:'
         }
     }
 
@@ -15,7 +15,7 @@ Describe 'Assert-Condition' {
         It 'Should not output message' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'SilentlyContinue' } -ParameterFilter { $Name -eq 'DebugPreference' }
             { Assert-Condition -Condition $true -Message 'Assertion failed: Test error message' } |
-                Should -BeNullOrEmpty
+                Should -Be $null
         }
     }
 }
@@ -37,7 +37,7 @@ Describe 'Get-Square' {
         It 'Should output an message stating that the Assertion failed: input must not be a negative number' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'Continue' } -ParameterFilter { $Name -eq 'DebugPreference' }
             { Get-Square -num -4 } |
-                Should -StartWith 'Assertion failed:'
+                Should -Contain 'Assertion failed:'
         }
     }
 }
