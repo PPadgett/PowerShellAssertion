@@ -51,12 +51,5 @@ jobs:
      # Run Pester Test     
       - name: Run Pester tests
         run: |
-          Invoke-Pester -OutputFormat NUnitXml -OutputFile 'results-pester.xml'
+          Invoke-Pester -CI GithubActions
         shell: pwsh
-     
-     # Upload the NunitXml file generated in the previous step
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: ./results-pester.xml
