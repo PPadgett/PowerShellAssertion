@@ -51,5 +51,5 @@ jobs:
      # Run Pester Test     
       - name: Run Pester tests
         run: |
-          Invoke-Pester -CI GithubActions
+          Invoke-Pester ./Assertion.Tests.ps1 -CI GithubActions
         shell: pwsh
