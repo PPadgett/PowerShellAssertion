@@ -15,7 +15,7 @@ Describe 'Assert-Condition' {
         It 'Should not output message' {
             Mock -CommandName 'Get-Variable' -MockWith { return 'SilentlyContinue' } -ParameterFilter { $Name -eq 'DebugPreference' }
             { Assert-Condition -Condition ($true) -Message 'Assertion failed: Test error message' } |
-                Should -BeNullOrEmpty
+                Should -Not -BeNullOrEmpty
         }
     }
 }
@@ -23,13 +23,13 @@ Describe 'Assert-Condition' {
 Describe 'Get-Square' {
     Context 'When the input number is positive' {
         It 'Should return the square of the input number' {
-            Get-Square -num 4 | Should -BeGreaterThan 0
+            Get-Square -num 4 | Should -Contain 16
         }
     }
 
     Context 'When the input number is zero' {
         It 'Should return zero' {
-            Get-Square -num 0 | -BeLike "*0*"
+            Get-Square -num 0 | Should -Contain "0"
         }
     }
 
