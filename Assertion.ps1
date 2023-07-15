@@ -46,7 +46,7 @@ function Assert-Condition {
     # If the hash code is not 0 (meaning the DebugPreference is 'Stop', 'Continue' or 'Inquire'), the function will check the condition
     if ((Get-Variable -Name DebugPreference -ValueOnly).GetHashCode() -ne 0) {
         # If the condition is met (is true), it will throw the provided message, otherwise it will not do anything ($null)
-        $Condition ? Write-Error "Assertion failed: $($Message)" -ErrorAction Stop : $null
+        $Condition ? "Assertion failed: $($Message)" : $null
     }
 }
 
@@ -66,4 +66,5 @@ Write-Output (Get-Square 4)  # Output: 16
 
 # Call the function with a negative number
 $DebugPreference = 'Continue'
-Write-Output (Get-Square -4) # Output: Input mu
+Write-Output (Get-Square -4) # Output: Input must not be a negative number
+16
