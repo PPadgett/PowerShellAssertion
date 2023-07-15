@@ -62,9 +62,8 @@ function Get-Square {
 }
 
 # Call the function with a positive number
-Write-Output (Get-Square 4)  # Output: 16
+#Write-Output (Get-Square 4)  # Output: 16
 
 # Call the function with a negative number
-$DebugPreference = 'Continue'
-Write-Output (Get-Square -4) # Output: Input must not be a negative number
-16
+#$DebugPreference = 'Continue'
+#Write-Output (Get-Square -4) # Output: Input must not be a negative number
