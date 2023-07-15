@@ -7,7 +7,7 @@
 # For more information on PSScriptAnalyzer in general, see
 # https://github.com/PowerShell/PSScriptAnalyzer
 
-name: PSScriptAnalyzer
+name: PSScriptAnalyzer and Pester
 
 on:
   push:
@@ -51,7 +51,7 @@ jobs:
      # Run Pester Test     
       - name: Run Pester tests
         run: |
-          Invoke-Pester -Path 'path\to\your\tests.ps1' -OutputFormat NUnitXml -OutputFile 'results-pester.xml'
+          Invoke-Pester -OutputFormat NUnitXml -OutputFile 'results-pester.xml'
         shell: pwsh
      
      # Upload the NunitXml file generated in the previous step
